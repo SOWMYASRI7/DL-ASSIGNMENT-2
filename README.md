@@ -95,18 +95,19 @@ Devanagari Target (Decoded): अंकल
 
 #### Sample Predictions
 
-| Input      | Predicted |
-|------------|-----------|
-| ank        | अंक       |
-| anka       | अंका      |
-| ankit      | अंकित     |
-| anakon     | अनकों     |
-| ankhon     | अंखोह     |
-| ankon      | अंकों     |
-| angkor     | अंगोग     |
-| ankor      | अंकोर     |
-| angaarak   | अंगारक    |
-| angarak    | अंगररक    |
+| Input      | Predicted | Actual   |
+|------------|-----------|----------|
+| ank        | अंक       | अंक      |
+| anka       | अंका      | अंका     |
+| ankit      | अंकित     | अंकित    |
+| anakon     | अनकों     | अंकों     |
+| ankhon     | अंखोह     | आंखों    |
+| ankon      | अंकों     | अंकों     |
+| angkor     | अंगोग     | अंकोर     |
+| ankor      | अंकोर     | अंकोर    |
+| angaarak   | अंगारक    | अंगारक   |
+| angarak    | अंगररक    | अंगारक   |
+
 
 #### Visualization
 
