@@ -66,22 +66,31 @@ Each file contains parallel Latin and Devanagari word pairs.
 
 ### Sample of Preprocessed Data
 Latin Input (Encoded): [ 1 14  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
 Latin Input (Decoded): an
+
 Devanagari Target (Encoded): [6 4 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+
 Devanagari Target (Decoded): अं
 
 --------------------------------------------------
 
 Latin Input (Encoded): [ 1 14 11  7  1 14  9 20  0  0  0  0  0  0  0  0  0  0  0  0]
+
 Latin Input (Decoded): ankganit
+
 Devanagari Target (Encoded): [ 6  4 18 20 32 53 33  2  0  0  0  0  0  0  0  0  0  0  0  0]
+
 Devanagari Target (Decoded): अंकगणित
 
 --------------------------------------------------
 
 Latin Input (Encoded): [21 14  3 12  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
 Latin Input (Decoded): uncle
+
 Devanagari Target (Encoded): [ 6  4 18 45  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+
 Devanagari Target (Decoded): अंकल
 
 #### Sample Predictions
