@@ -1,9 +1,100 @@
 # DL-ASSIGNMENT-2
 
+1.Latin to Devanagari Transliteration using RNN-based Seq2Seq Model
+
+Overview:
+
+This project implements a flexible sequence-to-sequence (seq2seq) model for transliterating Latin-script Hindi text into Devanagari script. The model uses RNN-based encoders and decoders at the character level.
+
+The model is built with the following architecture:
+
+Character embedding layer for input characters
+
+Encoder RNN (configurable: RNN / LSTM / GRU)
+
+Decoder RNN that generates one character at a time
+
+Dense layer for output character prediction
+
+Model Flexibility
+You can customize:
+
+Embedding dimension (m)
+
+Hidden state dimension (k)
+
+Number of layers in encoder and decoder
+
+RNN Cell type: SimpleRNN, LSTM, or GRU
+
+These parameters are passed into the model-building function to allow easy experimentation.
+
+Dataset:
+The model is trained using the Dakshina dataset, specifically the Hindi transliteration subset:
+
+/content/hi.translit.sampled.train.tsv
+
+/content/hi.translit.sampled.dev.tsv
+
+/content/hi.translit.sampled.test.tsv
+
+Each file contains parallel examples of:
+
+Latin transliterations of Hindi words
+
+Corresponding Devanagari representations
+
+Architecture:
+Embedding Layer: Transforms one-hot character indices to dense vectors of dimension m.
+
+Encoder:
+
+One or more RNN layers (configurable)
+
+Processes the input sequence
+
+Outputs the final hidden state(s)
+
+Decoder:
+
+Takes the encoder's final state as its initial state
+
+Generates one output character at each time step
+
+
+✅ Best Model and Results
+🔍 Grid Sweep over Cell Types
+Explored SimpleRNN, GRU, and LSTM architectures
+
+Trained each for 10 epochs
+
+Evaluated accuracy on test set
+
+🏆 Best Model:
+Cell Type: LSTM
+
+Embedding Dim: 64
+
+Hidden Dim: 128
+
+Layers: 1 encoder, 1 decoder
+
+Test Accuracy: XX.XX% (replace with your actual result)
+
+🔤 Sample Predictions
+Input (Latin)	Predicted (Devanagari)	Actual (Devanagari)
+namaste	नमस्ते	नमस्ते
+bharat	भारत	भारत
+shukriya	शुक्रिया	शुक्रिया
+dilli	दिल्ली	दिल्ली
+
+📈 Visualization
+Training loss curves for each model are plotted to show convergence across epochs.
 
 
 
-2.GPT-2 Song Lyrics Generation: Ed Sheeran & Coldplay
+
+  2.GPT-2 Song Lyrics Generation: Ed Sheeran & Coldplay
 
 The model is fine-tuned on a dataset containing lyrics from these two artists, allowing it to generate creative and stylistically similar lyrics based on user prompts.
 
