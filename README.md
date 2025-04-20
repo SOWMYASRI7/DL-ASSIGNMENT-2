@@ -1,136 +1,137 @@
 # DL-ASSIGNMENT-2
 
-1.Latin to Devanagari Transliteration using RNN-based Seq2Seq Model
+This repository contains two deep learning projects:
 
-Overview:
+1. Latin to Devanagari Transliteration using RNN-based Seq2Seq Model  
+2. GPT-2 Song Lyrics Generation: Ed Sheeran & Coldplay
 
-This project implements a flexible sequence-to-sequence (seq2seq) model for transliterating Latin-script Hindi text into Devanagari script. The model uses RNN-based encoders and decoders at the character level.
+---
 
-The model is built with the following architecture:
+## 1. Latin to Devanagari Transliteration (Seq2Seq Model)
 
-Character embedding layer for input characters
+### Overview
+This project implements a character-level sequence-to-sequence (seq2seq) model to transliterate Latin-script Hindi words into Devanagari script using an RNN-based encoder-decoder architecture.
 
-Encoder RNN (configurable: RNN / LSTM / GRU)
+### Model Architecture
+- **Embedding Layer**: Converts input character indices into dense vectors.
+- **Encoder**: Configurable RNN (SimpleRNN / LSTM / GRU) with customizable layers.
+- **Decoder**: Takes encoder's final state to generate output characters one at a time.
+- **Dense Layer**: Predicts output character probabilities at each decoding step.
 
-Decoder RNN that generates one character at a time
+### Model Flexibility
+Customizable parameters:
+- Embedding dimension (m)
+- Hidden state dimension (k)
+- Number of encoder and decoder layers
+- RNN Cell Type: SimpleRNN, LSTM, or GRU
 
-Dense layer for output character prediction
+### Dataset
+Uses the Hindi transliteration subset of the Dakshina dataset:
+- `/content/hi.translit.sampled.train.tsv`
+- `/content/hi.translit.sampled.dev.tsv`
+- `/content/hi.translit.sampled.test.tsv`
 
-Model Flexibility
-You can customize:
+Each file contains parallel Latin and Devanagari word pairs.
 
-Embedding dimension (m)
+---
 
-Hidden state dimension (k)
+### (a) Total Number of Computations
 
-Number of layers in encoder and decoder
+**Given:**
+- Embedding size (m) = 256  
+- Hidden state size (k) = 256  
+- Vocabulary size (V) = 60  
+- Sequence length (T) = 20  
 
-RNN Cell type: SimpleRNN, LSTM, or GRU
+**Formula:**Total Computation = T × [8k(m + k) + kV]
 
-These parameters are passed into the model-building function to allow easy experimentation.
+**Calculation:**= 20 × [8×256(256+256) + 256×60] = 21.28 million operations
 
-Dataset:
-The model is trained using the Dakshina dataset, specifically the Hindi transliteration subset:
+---
 
-/content/hi.translit.sampled.train.tsv
+### (b) Total Number of Parameters 
 
-/content/hi.translit.sampled.dev.tsv
-
-/content/hi.translit.sampled.test.tsv
-
-Each file contains parallel examples of:
-
-Latin transliterations of Hindi words
-
-Corresponding Devanagari representations
-
-Architecture:
-Embedding Layer: Transforms one-hot character indices to dense vectors of dimension m.
-
-Encoder:
-
-One or more RNN layers (configurable)
-
-Processes the input sequence
-
-Outputs the final hidden state(s)
-
-Decoder:
-
-Takes the encoder's final state as its initial state
-
-Generates one output character at each time step
+**Formula:**Total Params = 2Vm + 8k(m + k + 1) + kV + V
 
 
-✅ Best Model and Results
-🔍 Grid Sweep over Cell Types
-Explored SimpleRNN, GRU, and LSTM architectures
-
-Trained each for 10 epochs
-
-Evaluated accuracy on test set
-
-🏆 Best Model:
-Cell Type: LSTM
-
-Embedding Dim: 64
-
-Hidden Dim: 128
-
-Layers: 1 encoder, 1 decoder
-
-Test Accuracy: XX.XX% (replace with your actual result)
-
-🔤 Sample Predictions
-Input (Latin)	Predicted (Devanagari)	Actual (Devanagari)
-namaste	नमस्ते	नमस्ते
-bharat	भारत	भारत
-shukriya	शुक्रिया	शुक्रिया
-dilli	दिल्ली	दिल्ली
-
-📈 Visualization
-Training loss curves for each model are plotted to show convergence across epochs.
+**Calculation:**= 2×60×256 + 8×256(256+256+1) + 256×60 + 60 = 1.10 million parameters
 
 
+---
 
+### (c) Best Model Accuracy and Predictions
 
-  2.GPT-2 Song Lyrics Generation: Ed Sheeran & Coldplay
+- **Best Cell Type:** LSTM  
+- **Test Accuracy:** 29.12%
 
-The model is fine-tuned on a dataset containing lyrics from these two artists, allowing it to generate creative and stylistically similar lyrics based on user prompts.
+### Sample of Preprocessed Data
+Latin Input (Encoded): [ 1 14  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Latin Input (Decoded): an
+Devanagari Target (Encoded): [6 4 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+Devanagari Target (Decoded): अं
 
-The goal of this project is to:
+--------------------------------------------------
 
-Fine-tune the GPT-2 model on lyrics from Ed Sheeran and Coldplay.
+Latin Input (Encoded): [ 1 14 11  7  1 14  9 20  0  0  0  0  0  0  0  0  0  0  0  0]
+Latin Input (Decoded): ankganit
+Devanagari Target (Encoded): [ 6  4 18 20 32 53 33  2  0  0  0  0  0  0  0  0  0  0  0  0]
+Devanagari Target (Decoded): अंकगणित
 
-Use the fine-tuned model to generate new lyrics based on input prompts.
+--------------------------------------------------
 
-Technologies and Libraries Used
-Python:
+Latin Input (Encoded): [21 14  3 12  5  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Latin Input (Decoded): uncle
+Devanagari Target (Encoded): [ 6  4 18 45  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+Devanagari Target (Decoded): अंकल
 
-The core language for writing the code and running the scripts.
+#### Sample Predictions
 
-Hugging Face Transformers:
+| Input      | Predicted |
+|------------|-----------|
+| ank        | अंक       |
+| anka       | अंका      |
+| ankit      | अंकित     |
+| anakon     | अनकों     |
+| ankhon     | अंखोह     |
+| ankon      | अंकों     |
+| angkor     | अंगोग     |
+| ankor      | अंकोर     |
+| angaarak   | अंगारक    |
+| angarak    | अंगररक    |
 
-GPT-2: A pre-trained transformer model used for language generation. The model is fine-tuned on the lyrics dataset (Ed Sheeran & Coldplay) to generate song lyrics in the same style.
+#### Visualization
 
-Trainer: A utility from the Hugging Face library to simplify the training process, which handles batching, optimization, and checkpointing.
+![Training Loss Curve](https://github.com/user-attachments/assets/5ad3f7d2-a429-4efc-b60c-6b5a641d8695)
 
-Tokenizer: Tokenizes input text (lyrics) to convert it into a format suitable for GPT-2.
+---
 
-PyTorch:
+## 2. GPT-2 Song Lyrics Generation: Ed Sheeran & Coldplay
 
-Deep Learning Framework: Used for defining and training the GPT-2 model. PyTorch handles the neural network's operations, including training and inference.
+### Goal
+Fine-tune GPT-2 on lyrics from Ed Sheeran and Coldplay to generate stylistically similar lyrics from custom prompts.
 
-Pandas:
+### Technologies Used
 
-Data Manipulation: Used to read and clean the lyrics dataset stored in Excel format. The dataset is preprocessed to ensure that the lyrics are properly formatted for training.
+- **Python**
+- **Hugging Face Transformers**: GPT-2, Trainer, Tokenizer
+- **PyTorch**
+- **Pandas**
+- **Excel**: Dataset stored in `EdSheeran_Coldplay_Lyrics.xlsx` (LYRICS column)
+- **Other**: OS, Torch (for GPU acceleration)
 
-Excel:
+### Fine-tuning Pipeline
 
-Dataset Format: The lyrics dataset is stored in an Excel file (EdSheeran_Coldplay_Lyrics.xlsx). Each song's lyrics are stored in the "LYRICS" column.
+1. Load and preprocess lyrics dataset.
+2. Tokenize text with GPT-2 tokenizer.
+3. Fine-tune using Hugging Face `Trainer` API.
+4. Generate lyrics from custom prompts.
 
-Other Python Libraries:
+---
 
-OS: For file path handling.
+### Example Prompt
 
-Torch: To leverage GPU acceleration (if available) for faster model training.
+> **Prompt:** "When the lights go out"  
+> **Generated:** "And the silence starts to scream, I’m holding on to a dream..."
+
+---
+
